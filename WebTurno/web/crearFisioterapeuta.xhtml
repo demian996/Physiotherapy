@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Registro Medico</title>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/>
+        <!--JavaScript at end of body for optimized loading-->
+        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <!-- Compiled and minified JavaScript -->
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+
+                background-image: linear-gradient(150deg,#FEF9E7 ,#F6DDCC,#F1948A ,#7DCEA0,#A3E4D7,#85929E);
+                background-size: 140%;
+                height: 100vh;
+                animation: fanimado 50s infinite;
+            }
+            @keyframes fanimado {
+                0%{
+                background-position: 0% 50%;
+            }
+            50%{
+                background-position: 100% 50%;
+            }
+            100%{
+                background-position: 0% 50%;
+            }
+            }
+        </style>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>  
+    </h:head>
+
+    <h:body style=" background-image: url(fondo/F2.jpg)" >
+        <div class="container">
+            <div class="text-center">
+                
+                 <div>
+                    <h3 style="color : white; font-family: serif" >Registro  Médico</h3>
+                </div>
+                <h:form>
+                    <div class="center-align">
+                        <h:commandLink value="Volver" styleClass="btn btn-primary font-size: 24" action="inicioPaciente.xhtml"/>
+                    </div>
+                </h:form>
+            </div>
+            <div class="center-align">
+                <div class="row">
+                    <div class="col s6 offset-s3" >
+
+                        <p:growl autoUpdate="true" showDetail="true"/>
+                        <p:messages autoUpdate="true" showDetail="true" />
+                       
+
+                        <h:form id="register">
+                            <div class="col s12 input-field">
+                                <p:inputText required="true" style="color: white; background: #85929E; border-radius: 5px " requiredMessage="La cedula del usuario es requerido!" value="#{SesionFisioterapeuta.fisioterapeutaSesion.numCedula}" />
+                                <h:outputLabel for="cedula" value="Cedula" style="color: white; font-family: serif; font-size: 24"/>
+                            </div>
+                            <div class="col s12 input-field">
+                                <p:inputText  required="true" style="color: white; background: #85929E; border-radius: 5px " requiredMessage="El nombre es requerido!" value="#{SesionFisioterapeuta.fisioterapeutaSesion.nombres}" />
+                                <h:outputLabel for="nombres" value="Nombre" style="color: white; font-family: serif; font-size: 24"/>
+                            </div>
+                            <div class="col s12 input-field">
+                                <p:inputText  required="true" style="color: white; background: #85929E; border-radius: 5px " requiredMessage="El apellido es requerido!" value="#{SesionFisioterapeuta.fisioterapeutaSesion.apellidos}" />
+                                <h:outputLabel for="apellidos" value="Apellido" style="color: white; font-family: serif; font-size: 24"/>
+                            </div>
+                            <div class="col s12 input-field">
+                                <div class="container">
+                                    <h:outputLabel for="clinica" value="Clinica Perteneciente" style="color: white; font-family: serif; font-size: 24"/>
+                                    <p:selectOneMenu id="clinica" style="max-width: 5000px" value="#{SesionFisioterapeuta.idClinica}" >
+                                        <f:selectItem itemLabel="Seleccione Clinica" itemValue="" />
+                                        <f:selectItems value="#{jSFCita.listaClinica}" var="clin" itemLabel="#{clin.nombre}" itemValue="#{clin.idClinica}" />
+                                    </p:selectOneMenu >
+                                </div>
+                            </div>
+                            <div class="col s12 input-field">
+                                <p:inputText  required="true" style="color: white; background: #85929E; border-radius: 5px " requiredMessage="El numero de telefono es requerido!" value="#{SesionFisioterapeuta.fisioterapeutaSesion.telefono}" />
+                                <h:outputLabel for="telefono" value="Telefono" style="color: white; font-family: serif; font-size: 24"/>
+                            </div>
+                            <div class="col s12 input-field">
+                                <p:inputText required="true" style="color: white; background: #85929E; border-radius: 5px " requiredMessage="La fecha de nacimiento es requerida!" value="#{SesionFisioterapeuta.fisioterapeutaSesion.fechaNacimiento}" />
+                                <h:outputLabel for="Edad" value="Fecha Nacimiento formato(dd.mm.yy)" style="color: white; ;font-size: 24"/>
+                            </div>
+                            <div class="col s12 input-field">
+                                <p:inputText required="true" style="color: white; background: #85929E; border-radius: 5px " requiredMessage="El correo electrónico es requerido!" value="#{SesionFisioterapeuta.fisioterapeutaSesion.correoe}" />
+                                <h:outputLabel for="Correo Electrónico" value="Correo Electrónico" style="color: white; font-family: serif; font-size: 24"/>
+                            </div>
+                            <div class="col s12 input-field">
+                                <p:inputText value="#{SesionFisioterapeuta.fisioterapeutaSesion.clave}" type="password" style="color: white; background: #85929E; border-radius: 5px " label="Password 2" required="true" requiredMessage="La Contraseña es requerida!"/>
+                                <h:outputLabel for="Contraseña" value="Contraseña" style="color: white; font-family: serif; font-size: 24"/>
+                            </div>
+                            <div class="center-align">
+                                <div class="col s12 input-field">                                               
+                                    <h:commandLink value="Registrarse" styleClass="btn btn-large" action="#{SesionFisioterapeuta.crearFisioterapeuta()}"/>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            $(document).on("ready", function() {
+                $('#login-page').css({'height': window.innerHeight + 'px'});
+            });
+        </script>
+
+    </h:body>
+
+</html>

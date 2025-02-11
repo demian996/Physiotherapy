@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+
+         
+        </h:head>
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    <p:toolbar>
+                        <p:toolbarGroup align="left">
+                            <p:commandButton type="push" value="New" image="ui-icon-document" />
+                            <p:commandButton type="push" value="Open" image="ui-icon-folder-open"/>
+                            <span class="ui-separator">
+                                <span class="ui-icon ui-icon-grip-dotted-vertical" />
+                            </span>
+                            <p:commandButton type="push" title="Save" image="ui-icon-disk"/>
+                            <p:commandButton type="push" title="Delete" image="ui-icon-trash"/>
+                            <p:commandButton type="push" title="Print" image="ui-icon-print"/>
+                        </p:toolbarGroup>
+                        <p:toolbarGroup align="right">
+                            <h:form>
+                                <p:menuButton value="Navigate">
+                                    <p:menuitem> <img src="user.png" alt="60" width="60" /> </p:menuitem>
+                                    <p:menuitem value="Home" url="#" />
+                                    <p:menuitem value="Logout" url="#" />
+                                </p:menuButton>
+                            </h:form>
+
+                        </p:toolbarGroup>
+                    </p:toolbar>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="east" size="320" closable="Right" collapsible="true">
+                    <p:calendar value="#{dateBean.date}" mode="inline" />
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <h:form>
+                        <p:menu >
+                            <p:submenu label="Resources">
+                                <p:menuitem  value="Crear Paciente" outcome="crearPaciente.xhtml" />
+                                <p:menuitem  value="Crear Medico" outcome="crearFisioterapeuta.xhtml" />
+                                <p:menuitem  value="Crear Cita" outcome="crearCita.xhtml" />
+                                <p:menuitem  id="paciente" value="Crear Servicios"/>
+
+                            </p:submenu>
+
+                        </p:menu>
+                    </h:form>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <div id="contenido">
+                    </div>
+                </p:layoutUnit>
+
+            </p:layout>
+
+            <script type="text/javascript">
+
+                $('#paciente').click(function() {
+                    var esperar = 2;
+                    $.ajax({
+                        url: "crearPaciente.xhtml",
+                        beforeSend: function() {
+                            $('#contenido').text('Cargando...');
+                        },
+                        success: function(data) {
+                            setTimeout(function() {
+                                $('#crearPaciente').xhtml(data);
+                            }, esperar
+                                    );
+                        }
+                    });
+                });
+            </script>
+
+        </h:body>
+
+    </f:view>
+
+</html>
+

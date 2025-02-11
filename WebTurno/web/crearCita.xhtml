@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <title>Crear Cita</title>
+            <!-- Compiled and minified CSS -->
+        <!-- link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"/ -->
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background-image: linear-gradient(150deg,#FEF9E7 ,#F6DDCC,#F1948A ,#7DCEA0,#A3E4D7,#85929E);
+                background-size: 80%;
+                height: 100vh;
+                animation: fanimado 50s infinite;
+            }
+            @keyframes fanimado {
+                0%{
+                background-position: 0% 50%;
+            }
+            50%{
+                background-position: 10% 50%;
+            }
+            100%{
+                background-position: 0% 50%;
+            }
+            }
+        </style>
+        </h:head>
+
+        <h:body style=" background-image: url(F1.jpg)">
+            <p:growl autoUpdate="true" showDetail="true"/>
+            <p:messages autoUpdate="true" showDetail="true" />
+            <h:form>
+                <h1 style=" text-align: center ; color: white; font-family: serif; font-size: 100px" >FISIOTHERAPHY</h1>    
+                <div >
+                    <div class="col s12 input-field">
+                        <h:commandButton value="Salir de esta Clinica" styleClass="btn btn-large" action="#{ManagedCita.salirClinica()}" /> >
+                    </div>
+                </div> 
+            </h:form>
+
+            <h:form>
+                <div class="center-align">
+            <p:panelGrid columns="2" style="color: blue">
+                    <f:facet name="header" >
+                        Ingreso de Datos la Cita
+                    </f:facet>
+                    <h:outputText value=""/>
+                    <p:selectOneMenu id="cita" value="#{jSFCita.idClinica}" >
+                        <f:selectItem itemLabel="Seleccione Clinica" itemValue="" />
+                        <f:selectItems value="#{jSFCita.cita.idPago}" var="cit" itemLabel="#{clin.nombre}" itemValue="#{clin.idClinica}" />
+                    </p:selectOneMenu >
+                    <h:outputText value=""/>
+                    <p:selectOneMenu id="cita2" value="#{jSFCita.idClinica}" >
+                        <f:selectItem itemLabel="Seleccione Clinica" itemValue="" />
+                        <f:selectItems value="#{jSFCita.cita.idPacientes}" var="cit" itemLabel="#{clin.nombre}" itemValue="#{clin.idClinica}" />
+                    </p:selectOneMenu >
+                    <h:outputText value=""/>
+                    <p:selectOneMenu id="medico" value="#{jSFCita.idFisioterapeuta}" >
+                        <f:selectItem itemLabel="Selccione el Medico: " itemValue="Medico: " />
+                        <f:selectItems value="#{jSFCita.listaFisioterapeuta}" var="cit" itemLabel="#{cit.apellidos}" itemValue="#{cit.numCedula}" />
+                    </p:selectOneMenu >
+                    <h:outputText value="Fecha Nacimiento "/>
+                    <p:calendar value="#{jSFCita.cita.horario}"/>
+
+                    <f:facet name="footer">
+                        <p:commandButton  value="Grabar" icon="ui-icon-check" action="#{jSFCita.crearCita()}" />
+                    </f:facet>
+                </p:panelGrid >
+                </div>
+            </h:form>
+                </div>
+            <script>
+            $(document).on("ready", function() {
+                $('#login-page').css({'height': window.innerHeight + 'px'});
+            });
+        </script>
+        </h:body>
+
+    </f:view>
+</html>
